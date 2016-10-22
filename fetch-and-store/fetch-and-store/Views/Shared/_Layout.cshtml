@@ -6,16 +6,17 @@
     <title>@ViewBag.Title - Fetch and Store</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="container body-content">
         @RenderBody()
     </div>
 
+    @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/angular")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/app/app.js"></script>
+    <script type="text/javascript" src="~/app/app-controller.js"></script>
 </body>
 </html>
