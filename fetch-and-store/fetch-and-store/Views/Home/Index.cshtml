@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div ng-app>
+    <h1 class="text-center">Fetch and Store</h1>
+    <br />
+    <form class="form-inline">
+            <select id="database-query" class="form-control">
+                <option selected>Choose Database Query</option>
+                <option value="get">GET</option>
+                <option value="post">POST</option>
+            </select>
+            <input type="text" class="form-control" id="url-input" placeholder="Input Url">
+        <button type="submit" class="btn btn-primary">Fetch</button>
+    </form>
+</div>
