@@ -10,11 +10,16 @@
                 <select class="form-control" ng-model="queryType">
                     <option selected value="">Choose Database Query</option>
                     <option value="get">GET</option>
+                    <option value="head">HEAD</option>
                     <option value="post">POST</option>
                 </select>
                 <input ng-model="inputURL" type="text" class="form-control" id="url-input" placeholder="Input Url">
-            <button ng-click="updateQueryType(queryType, inputURL);" class="btn btn-primary">Fetch</button>
+            <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary">Fetch</button>
         </form>
-        <p id="user-field">Current Query Type is: {{queryType}}</p>
+        <br />
+        <div ng-if="queryData.responseSent">
+            <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
+            <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+        </div>
     </div>
 </div>
