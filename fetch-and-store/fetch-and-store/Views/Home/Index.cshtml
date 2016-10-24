@@ -12,7 +12,6 @@
                     <option value="">Choose Database Query</option>
                     <option value="get">GET</option>
                     <option value="head">HEAD</option>
-                    <option value="post">POST</option>
                 </select>
             </div>
             
@@ -25,15 +24,18 @@
                     <span ng-if="queryType == 'get' || queryType == 'head'">
                         <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
                     </span>
-                    <span ng-if="queryType == 'post'" >
-                        <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Send!</button>
-                    </span>
+
                 </span>
         </form>
         <br />
-        <div ng-if="queryData.responseSent">
-            <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
-            <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+        <div ng-if="queryData.responseSent" class="row">
+            <div class="col-xs-3 col-sm-offset-3">
+                <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
+                <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+            </div>
+            <div class="col-xs-5">
+                <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Post It!</button>
+            </div>
         </div>
     </div>
 </div>
