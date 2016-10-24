@@ -3,18 +3,32 @@
 }
 
 <div ng-app="fetcher">
-    <div class="text-center" ng-controller="mainPage">
-        <h1 class="text-center">Fetch and Store</h1>
+    <div class="text-center" ng-controller="mainPage" ng-cloak>
+        <h1>Fetch and Store</h1>
         <br />
         <form class="form-inline">
-                <select class="form-control" ng-model="queryType">
-                    <option selected value="">Choose Database Query</option>
+            <div class="form-group">
+                <select class="form-control" ng-model="queryType" ng-init="queryType=''">
+                    <option value="">Choose Database Query</option>
                     <option value="get">GET</option>
                     <option value="head">HEAD</option>
                     <option value="post">POST</option>
                 </select>
+            </div>
+            
                 <input ng-model="inputURL" type="text" class="form-control" id="url-input" placeholder="Input Url">
-            <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary">Fetch</button>
+                
+                <span>
+                    <span ng-if="queryType == ''">
+                        <button disabled class="btn btn-primary btn-width">None</button>
+                    </span>
+                    <span ng-if="queryType == 'get' || queryType == 'head'">
+                        <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
+                    </span>
+                    <span ng-if="queryType == 'post'" >
+                        <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Send!</button>
+                    </span>
+                </span>
         </form>
         <br />
         <div ng-if="queryData.responseSent">

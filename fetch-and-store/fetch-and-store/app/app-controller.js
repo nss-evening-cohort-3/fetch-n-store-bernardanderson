@@ -19,14 +19,27 @@ app.controller("mainPage", function ($scope, $http) {
                 responseSent: true
             };
         };
-
-        $http({
-            method: sentQueryType,
-            url: `http://${sentInputURL}`
-        }).then(function successCallback(response) {
-            setResponseData(response);
-        }, function errorCallback(response) {
-            setResponseData(response);
-        });
+        if (sentInputURL !== '') {
+            if (sentQueryType === 'get' || sentQueryType === 'head') {
+                $http({
+                    method: sentQueryType,
+                    url: `http://${sentInputURL}`
+                }).then(function successCallback(response) {
+                    setResponseData(response);
+                }, function errorCallback(response) {
+                    setResponseData(response);
+                });
+            } else if (sentQueryType === 'post') {
+                $http({
+                    method: sentQueryType,
+                    url: `http://${sentInputURL}`,
+                    data: ""
+                }).then(function successCallback(response) {
+                    setResponseData(response);
+                }, function errorCallback(response) {
+                    setResponseData(response);
+                });
+            }
+        }
     }
 });

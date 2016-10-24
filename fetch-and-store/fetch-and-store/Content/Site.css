@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.btn-width {
+    width: 135px;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}
