@@ -7,7 +7,6 @@ app.controller("mainPage", function ($scope, $http) {
     $scope.httpPostRequest = function(sentPostData) {
 
         console.log(sentPostData);
-        
         /* 
         $http({
             method: 'POST',
@@ -20,7 +19,6 @@ app.controller("mainPage", function ($scope, $http) {
         });
         */
     }
-
 
     $scope.httpGetRequest = function (sentQueryType, sentInputURL) {
         
