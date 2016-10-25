@@ -9,23 +9,29 @@
         <form class="form-inline">
             <div class="form-group">
                 <select class="form-control" ng-model="queryType" ng-init="queryType=''">
-                    <option value="">Choose Database Query</option>
+                    <option value="">Query Type?</option>
                     <option value="get">GET</option>
                     <option value="head">HEAD</option>
                 </select>
             </div>
-            
-                <input ng-model="inputURL" type="text" class="form-control" id="url-input" placeholder="Input Url">
-                
-                <span>
-                    <span ng-if="queryType == ''">
-                        <button disabled class="btn btn-primary btn-width">None</button>
-                    </span>
-                    <span ng-if="queryType == 'get' || queryType == 'head'">
-                        <button ng-click="httpGetRequest(queryType, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
-                    </span>
 
+            <div class="form-group">
+                <select class="form-control" ng-model="protocol" ng-init="protocol='http://'">
+                    <option value="http://">HTTP</option>
+                    <option value="https://">HTTPS</option>
+                </select>
+            </div>
+            
+            <input ng-model="inputURL" type="text" class="form-control" id="url-input" placeholder="Input Url">
+                
+            <span>
+                <span ng-if="queryType == ''">
+                    <button disabled class="btn btn-primary btn-width">None</button>
                 </span>
+                <span ng-if="queryType == 'get' || queryType == 'head'">
+                    <button ng-click="httpGetRequest(queryType, protocol, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
+                </span>
+            </span>
         </form>
         <br />
         <div ng-if="queryData.responseSent" class="row">

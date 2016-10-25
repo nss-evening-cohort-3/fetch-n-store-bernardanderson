@@ -20,7 +20,7 @@ app.controller("mainPage", function ($scope, $http) {
         */
     }
 
-    $scope.httpGetRequest = function (sentQueryType, sentInputURL) {
+    $scope.httpGetRequest = function (sentQueryType, sentProtocol, sentInputURL) {
         
         // Current time before http request
         let queryStart = Date.now();
@@ -41,7 +41,7 @@ app.controller("mainPage", function ($scope, $http) {
             if (sentQueryType === 'get' || sentQueryType === 'head') {
                 $http({
                     method: sentQueryType,
-                    url: `http://${sentInputURL}`
+                    url: `${sentProtocol}${sentInputURL}`
                 }).then(function successCallback(response) {
                     setResponseData(response);
                 }, function errorCallback(response) {
