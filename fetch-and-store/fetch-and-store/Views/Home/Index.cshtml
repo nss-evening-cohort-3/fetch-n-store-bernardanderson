@@ -22,7 +22,7 @@
                         <button disabled class="btn btn-primary btn-width">None</button>
                     </span>
                     <span ng-if="queryType == 'get' || queryType == 'head'">
-                        <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
+                        <button ng-click="httpGetRequest(queryType, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
                     </span>
 
                 </span>
@@ -34,7 +34,7 @@
                 <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
             </div>
             <div class="col-xs-5">
-                <button ng-click="httpRequest(queryType, inputURL);" class="btn btn-primary btn-width">Post It!</button>
+                <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width">Post It!</button>
             </div>
         </div>
     </div>
