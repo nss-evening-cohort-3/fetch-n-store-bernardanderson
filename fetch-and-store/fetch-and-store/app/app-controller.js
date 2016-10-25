@@ -8,27 +8,11 @@ app.controller("mainPage", function ($scope, $http) {
     $scope.httpDisplayDatabase = function() {
 
         $http.get("/api/Responses").then(function(response) {
-            console.log(response.data);
             $scope.databaseData = response.data;
         });
-
-        /*
-        let databaseObject = {
-            StatusCode: sentPostData.statusCode,
-            URL: sentPostData.inputURL,
-            ResponseTime: sentPostData.responseTime,
-            RequestTime: sentPostData.requestStartTime,
-            HTTPMethod: sentPostData.queryType
-        }
-        */
     }
 
-
-
-
     $scope.httpPostRequest = function(sentPostData) {
-
-        console.log(sentPostData);
 
         let databaseObject = {
             StatusCode: sentPostData.statusCode,

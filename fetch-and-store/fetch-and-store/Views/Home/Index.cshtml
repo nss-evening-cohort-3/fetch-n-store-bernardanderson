@@ -48,14 +48,16 @@
             </div>
         </div>
 
-        <div ng-if="databaseData" >
-            <span class="floralwhite col-xs-2 text-center">Request Method</span>
-            <span class="floralwhite col-xs-2 text-center">Request Time</span>
-            <span class="floralwhite col-xs-2 text-center">Response Time</span>
-            <span class="floralwhite col-xs-2 text-center">Status Code</span>
-            <span class="floralwhite col-xs-4 text-center">URL</span>
+        <div ng-if="databaseData" class="container">
+            <div class="row floralwhite">
+                <span class="col-xs-2 text-center">Request Method</span>
+                <span class="col-xs-2 text-center">Request Time (ms)</span>
+                <span class="col-xs-2 text-center">Response Time (ms)</span>
+                <span class="col-xs-2 text-center">Status Code</span>
+                <span class="col-xs-4 text-center">URL</span>
+            </div>
 
-            <div ng-repeat="databaseItem in databaseData" class="row" >
+            <div ng-repeat="databaseItem in databaseData" class="row" ng-class-even="'lightgreen'">
                 <span class="col-xs-2 text-center">{{databaseItem.HTTPMethod}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.RequestTime}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.ResponseTime}}</span>
