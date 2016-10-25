@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResponsesController.cs" />
     <Compile Include="DAL\ReponseRepository.cs" />
     <Compile Include="DAL\ResponseContext.cs" />
     <Compile Include="Global.asax.cs">

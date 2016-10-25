@@ -30,3 +30,11 @@ textarea {
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none;
 }
+
+.floralwhite {
+    background-color: floralwhite;
+}
+
+.lightgreen {
+    background-color: lightgreen;
+}

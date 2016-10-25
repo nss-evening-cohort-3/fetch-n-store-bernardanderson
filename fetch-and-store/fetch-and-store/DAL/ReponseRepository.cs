@@ -35,9 +35,5 @@ namespace fetch_and_store.DAL
 
             return Context.Responses.Select(a => a).ToList();
         }
-
-
-
-
     }
 }

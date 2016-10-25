@@ -3,21 +3,50 @@
 app.controller("mainPage", function ($scope, $http) {
 
     $scope.inputURL = "httpstat.us/";
+    $scope.databaseData = null;
+
+    $scope.httpDisplayDatabase = function() {
+
+        $http.get("/api/Responses").then(function(response) {
+            console.log(response.data);
+            $scope.databaseData = response.data;
+        });
+
+        /*
+        let databaseObject = {
+            StatusCode: sentPostData.statusCode,
+            URL: sentPostData.inputURL,
+            ResponseTime: sentPostData.responseTime,
+            RequestTime: sentPostData.requestStartTime,
+            HTTPMethod: sentPostData.queryType
+        }
+        */
+    }
+
+
+
 
     $scope.httpPostRequest = function(sentPostData) {
 
         console.log(sentPostData);
-        /* 
+
+        let databaseObject = {
+            StatusCode: sentPostData.statusCode,
+            URL: sentPostData.inputURL,
+            ResponseTime: sentPostData.responseTime,
+            RequestTime: sentPostData.requestStartTime,
+            HTTPMethod: sentPostData.queryType
+        }
+
         $http({
             method: 'POST',
-            url: '/api/Response',
-            data: 'Some Data'
+            url: '/api/Responses',
+            data: databaseObject
         }).then(function successCallback(response) {
-            setResponseData(response);
+            console.log("Successful Post");
         }, function errorCallback(response) {
-            setResponseData(response);
+            console.log("Post not Successful");
         });
-        */
     }
 
     $scope.httpGetRequest = function (sentQueryType, sentProtocol, sentInputURL) {
@@ -33,6 +62,7 @@ app.controller("mainPage", function ($scope, $http) {
                 responseTime: Date.now() - queryStart, // Finds the difference between query received and query start
                 queryType: sentResponse.config.method,
                 statusCode: sentResponse.status,
+                queryData: sentResponse.data,
                 responseSent: true
             };
         };

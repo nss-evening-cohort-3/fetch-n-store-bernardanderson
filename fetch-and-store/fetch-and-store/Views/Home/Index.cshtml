@@ -16,7 +16,8 @@
             </div>
 
             <div class="form-group">
-                <select class="form-control" ng-model="protocol" ng-init="protocol='http://'">
+                <select class="form-control" ng-model="protocol" ng-init="protocol=''">
+                    <option value="">LOCAL</option>
                     <option value="http://">HTTP</option>
                     <option value="https://">HTTPS</option>
                 </select>
@@ -31,6 +32,9 @@
                 <span ng-if="queryType == 'get' || queryType == 'head'">
                     <button ng-click="httpGetRequest(queryType, protocol, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
                 </span>
+                <span>
+                    <button ng-click="httpDisplayDatabase();" class="btn btn-primary btn-width">Display DB</button>
+                </span>
             </span>
         </form>
         <br />
@@ -43,5 +47,22 @@
                 <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width">Post It!</button>
             </div>
         </div>
+
+        <div ng-if="databaseData" >
+            <span class="floralwhite col-xs-2 text-center">Request Method</span>
+            <span class="floralwhite col-xs-2 text-center">Request Time</span>
+            <span class="floralwhite col-xs-2 text-center">Response Time</span>
+            <span class="floralwhite col-xs-2 text-center">Status Code</span>
+            <span class="floralwhite col-xs-4 text-center">URL</span>
+
+            <div ng-repeat="databaseItem in databaseData" class="row" >
+                <span class="col-xs-2 text-center">{{databaseItem.HTTPMethod}}</span>
+                <span class="col-xs-2 text-center">{{databaseItem.RequestTime}}</span>
+                <span class="col-xs-2 text-center">{{databaseItem.ResponseTime}}</span>
+                <span class="col-xs-2 text-center">{{databaseItem.StatusCode}}</span>
+                <span class="col-xs-4 text-center">{{databaseItem.URL}}</span>
+            </div>
+        </div>
+
     </div>
 </div>
