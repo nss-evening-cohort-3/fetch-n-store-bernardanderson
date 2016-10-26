@@ -38,18 +38,20 @@
             </span>
         </form>
         <br />
-        <div ng-if="queryData.responseSent" class="row">
-            <div class="col-xs-3 col-sm-offset-3">
-                <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
-                <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
-            </div>
-            <div class="col-xs-5">
-                <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width">Post It!</button>
+        <div class="container">
+            <div ng-if="queryData.responseSent" class="row">
+                <div class="col-xs-3 col-sm-offset-3">
+                    <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
+                    <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+                </div>
+                <div class="col-xs-5">
+                    <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width">Post It!</button>
+                </div>
             </div>
         </div>
 
-        <div ng-if="databaseData" class="container">
-            <div class="row floralwhite">
+        <div ng-show="databaseData" class="container">
+            <div class="row tableheadfont">
                 <span class="col-xs-2 text-center">Request Method</span>
                 <span class="col-xs-2 text-center">Request Time (ms)</span>
                 <span class="col-xs-2 text-center">Response Time (ms)</span>
@@ -57,7 +59,7 @@
                 <span class="col-xs-4 text-center">URL</span>
             </div>
 
-            <div ng-repeat="databaseItem in databaseData" class="row" ng-class-even="'lightgreen'">
+            <div ng-repeat="databaseItem in databaseData" class="row" ng-class-even="'tablerowfont'">
                 <span class="col-xs-2 text-center">{{databaseItem.HTTPMethod}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.RequestTime}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.ResponseTime}}</span>
