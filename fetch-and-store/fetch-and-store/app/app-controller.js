@@ -5,11 +5,15 @@ app.controller("mainPage", function ($scope, $http) {
     $scope.inputURL = "httpstat.us/";
     $scope.databaseData = null;
 
-    $scope.httpDisplayDatabase = function() {
+    $scope.httpDisplayDatabase = function(sentDatabaseBtnLabel) {
 
-        $http.get("/api/Responses").then(function(response) {
-            $scope.databaseData = response.data;
-        });
+        if (sentDatabaseBtnLabel) {
+            $http.get("/api/Responses").then(function(response) {
+                $scope.databaseData = response.data;
+            });
+        } else {
+            $scope.databaseData = null;
+        }
     }
 
     $scope.httpPostRequest = function(sentPostData) {

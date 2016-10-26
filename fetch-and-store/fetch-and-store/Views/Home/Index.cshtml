@@ -3,10 +3,10 @@
 }
 
 <div ng-app="fetcher">
-    <div class="text-center" ng-controller="mainPage" ng-cloak>
-        <h1>Fetch and Store</h1>
+    <div ng-controller="mainPage" ng-cloak>
+        <h1 class="text-center">Fetch and Store</h1>
         <br />
-        <form class="form-inline">
+        <form class="form-inline col-xs-12 col-sm-offset-1">
             <div class="form-group">
                 <select class="form-control" ng-model="queryType" ng-init="queryType=''">
                     <option value="">Query Type?</option>
@@ -24,7 +24,7 @@
             </div>
             
             <input ng-model="inputURL" type="text" class="form-control" id="url-input" placeholder="Input Url">
-                
+
             <span>
                 <span ng-if="queryType == ''">
                     <button disabled class="btn btn-primary btn-width">None</button>
@@ -33,23 +33,28 @@
                     <button ng-click="httpGetRequest(queryType, protocol, inputURL);" class="btn btn-primary btn-width">Fetch!</button>
                 </span>
                 <span>
-                    <button ng-click="httpDisplayDatabase();" class="btn btn-primary btn-width">Display DB</button>
+                    <button ng-init="databaseBtnLabel=true" ng-click="httpDisplayDatabase(databaseBtnLabel); databaseBtnLabel=!databaseBtnLabel" class="btn btn-primary btn-width">{{ databaseBtnLabel == true ? 'Display DB' : 'Hide DB' }}</button>
                 </span>
             </span>
         </form>
         <br />
-        <div class="container">
-            <div ng-if="queryData.responseSent" class="row">
-                <div class="col-xs-3 col-sm-offset-3">
-                    <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span></p>
-                    <p>Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+        <div class="container queryreporter">
+            <h3 class="text-center">Query Status</h3>
+            <div ng-show="queryData.responseSent" >
+                <div class="row">
+                    <div class="col-sm-offset-2">
+                        <p>Query status: <span class="text-danger">{{queryData.statusCode}}</span> // 
+                        Your <span class="text-danger">{{queryData.queryType}}</span> request to <span class="text-danger">{{queryData.inputURL}}</span> took <span class="text-danger">{{queryData.responseTime}}</span> ms.</p>
+                    </div>
                 </div>
-                <div class="col-xs-5">
-                    <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width">Post It!</button>
+                <div class="row">
+                    <div class="text-center">
+                        <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width-wider">Post It!</button>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <br />
         <div ng-show="databaseData" class="container">
             <div class="row tableheadfont">
                 <span class="col-xs-2 text-center">Request Method</span>
