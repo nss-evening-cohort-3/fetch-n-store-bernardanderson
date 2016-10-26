@@ -31,23 +31,26 @@ app.controller("mainPage", function ($scope, $http) {
             url: '/api/Responses',
             data: databaseObject
         }).then(function successCallback(response) {
-            console.log("Successful Post");
+            $('#post-result-report').text("**POST Successful**");
         }, function errorCallback(response) {
-            console.log("Post not Successful");
+            $('#post-result-report').text("**Unsuccessful POST Attempt**");
         });
     }
 
     $scope.httpGetRequest = function (sentQueryType, sentProtocol, sentInputURL) {
         
         // Current time before http request
-        let queryStart = Date.now();
+        let queryStart = {
+            inMilliSec: Date.now(),
+            readable: new Date().toUTCString()
+        };
 
         // Sets the query report data 
         let setResponseData = function (sentResponse) {
             $scope.queryData = {
                 inputURL: sentResponse.config.url,
-                requestStartTime: queryStart,
-                responseTime: Date.now() - queryStart, // Finds the difference between query received and query start
+                requestStartTime: queryStart.readable,
+                responseTime: Date.now() - queryStart.inMilliSec, // Finds the difference between query received and query start
                 queryType: sentResponse.config.method,
                 statusCode: sentResponse.status,
                 queryData: sentResponse.data,
