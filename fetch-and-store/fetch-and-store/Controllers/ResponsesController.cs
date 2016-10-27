@@ -15,60 +15,20 @@ namespace fetch_and_store.Controllers
 {
     public class ResponsesController : ApiController
     {
-        private ResponseContext db = new ResponseContext();
+        public ResponseContext Context { get; set; }
+        public ResponsesController()
+        {
+            Context = new ResponseContext();
+        }
+        public ResponsesController(ResponseContext _context)
+        {
+            Context = _context;
+        }
 
         // GET: api/Responses
         public IQueryable<Response> GetResponses()
         {
-            return db.Responses;
-        }
-
-        // GET: api/Responses/5
-        [ResponseType(typeof(Response))]
-        public IHttpActionResult GetResponse(int id)
-        {
-            Response response = db.Responses.Find(id);
-            if (response == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(response);
-        }
-
-        // PUT: api/Responses/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutResponse(int id, Response response)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != response.ResponseID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(response).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ResponseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Context.Responses;
         }
 
         // POST: api/Responses
@@ -80,40 +40,23 @@ namespace fetch_and_store.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Responses.Add(response);
-            db.SaveChanges();
+            Context.Responses.Add(response);
+            Context.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = response.ResponseID }, response);
         }
-
-        // DELETE: api/Responses/5
-        [ResponseType(typeof(Response))]
-        public IHttpActionResult DeleteResponse(int id)
-        {
-            Response response = db.Responses.Find(id);
-            if (response == null)
-            {
-                return NotFound();
-            }
-
-            db.Responses.Remove(response);
-            db.SaveChanges();
-
-            return Ok(response);
-        }
-
+        // Used in closing the DB connection but needs to be explictly called
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
-
         private bool ResponseExists(int id)
         {
-            return db.Responses.Count(e => e.ResponseID == id) > 0;
+            return Context.Responses.Count(e => e.ResponseID == id) > 0;
         }
     }
 }
