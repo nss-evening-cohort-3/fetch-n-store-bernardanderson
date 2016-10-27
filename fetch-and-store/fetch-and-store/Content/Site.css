@@ -27,6 +27,26 @@ textarea {
     width: 135px;
 }
 
+.btn-width-wider {
+    width: 300px;
+}
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none;
+}
+
+.tableheadfont {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    background-color: rgb(215, 200, 200);
+}
+
+.tablerowfont {
+    background-color: rgb(248, 216, 216);
+}
+
+.queryreporter {
+    width: 60vw;
+    height: 150px;
+    border: 1px solid lightgray;
 }
