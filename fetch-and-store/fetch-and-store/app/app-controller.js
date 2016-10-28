@@ -4,17 +4,38 @@
 app.controller("mainPage", function ($scope, $http) {
 
     $scope.inputURL = "httpstat.us/";
-    $scope.databaseData = null;
+    $scope.databaseData = {
+        data: [],
+        hideTable: true
+    };
 
     $scope.httpDisplayDatabase = function(sentDatabaseBtnLabel) {
 
         if (sentDatabaseBtnLabel) {
             $http.get("/api/Responses").then(function(response) {
-                $scope.databaseData = response.data;
+                $scope.databaseData.data = response.data;
+                $scope.databaseData.hideTable = false;
             });
         } else {
-            $scope.databaseData = null;
+            $scope.databaseData.hideTable = true;
         }
+    }
+
+    $scope.httpDeleteRequestFromDatabase = function (sentResponseID) {
+
+        let deleteSingleDatabaseItemInView = function (sentResponseID) {
+            let indexToDelete = $scope.databaseData.data.indexOf(sentResponseID);
+            $scope.databaseData.data.splice(indexToDelete, 1);
+        }
+
+        $http({
+            method: 'DELETE',
+            url: `/api/Responses/${sentResponseID}`,
+        }).then(function successCallback(response) {
+            deleteSingleDatabaseItemInView(sentResponseID);
+        }, function errorCallback(response) {
+            alert(`${sentResponseID} NOT deleted!`);
+        });
     }
 
     $scope.httpPostRequest = function(sentPostData) {
@@ -32,6 +53,7 @@ app.controller("mainPage", function ($scope, $http) {
             url: '/api/Responses',
             data: databaseObject
         }).then(function successCallback(response) {
+            $scope.databaseData.data.push(response.data);
             $('#post-result-report').text("**POST Successful**");
         }, function errorCallback(response) {
             $('#post-result-report').text("**Unsuccessful POST Attempt**");
@@ -66,8 +88,17 @@ app.controller("mainPage", function ($scope, $http) {
                     url: `${sentProtocol}${sentInputURL}`
                 }).then(function successCallback(response) {
                     setResponseData(response);
+                    $('#post-result-report').text("**GET Request Successful**");
                 }, function errorCallback(response) {
-                    setResponseData(response);
+                    if (response.status === -1) {
+                        $scope.queryData = {
+                            responseSent: false
+                        };
+                        $('#post-result-report').text("**ERROR in GET Request**");
+                    } else {
+                        $('#post-result-report').text("**GET Request Successful**");
+                        setResponseData(response);
+                    }
                 });
             } 
         }

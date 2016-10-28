@@ -40,6 +40,9 @@
         <br />
         <div class="container queryreporter">
             <h3 class="text-center">Query Status</h3>
+            <div class="row">
+                <p class="col-sm-10 col-sm-offset-2">Command Result: <span id="post-result-report"></span></p> 
+            </div>
             <div ng-show="queryData.responseSent" >
                 <div class="row">
                     <div class="col-sm-offset-2">
@@ -50,27 +53,34 @@
                 <div class="row">
                     <div class="text-center" ng-init="postResult=''">
                         <button ng-click="httpPostRequest(queryData);" class="btn btn-primary btn-width-wider">Post It!</button>
-                        <p id="post-result-report"></p> 
                     </div>
                 </div>
             </div>
         </div>
         <br />
-        <div ng-show="databaseData" class="container">
+        <div ng-hide="databaseData.hideTable" class="container">
             <div class="row tableheadfont">
-                <span class="col-xs-2 text-center">Request Method</span>
+                <span class="col-xs-1 text-center">R-Id</span>
+                <span class="col-xs-1 text-center">Method</span>
                 <span class="col-xs-2 text-center">Request Time (ms)</span>
                 <span class="col-xs-2 text-center">Response Time (ms)</span>
                 <span class="col-xs-2 text-center">Status Code</span>
-                <span class="col-xs-4 text-center">URL</span>
+                <span class="col-xs-3 text-center">URL</span>
+                <span class="col-xs-1 text-center">Delete?</span>
             </div>
 
-            <div ng-repeat="databaseItem in databaseData" class="row" ng-class-even="'tablerowfont'">
-                <span class="col-xs-2 text-center">{{databaseItem.HTTPMethod}}</span>
+            <div ng-repeat="databaseItem in databaseData.data" class="row" ng-class-even="'tablerowfont'">
+                <span class="col-xs-1 text-center">{{databaseItem.ResponseID}}</span>
+                <span class="col-xs-1 text-center">{{databaseItem.HTTPMethod}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.RequestTime}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.ResponseTime}}</span>
                 <span class="col-xs-2 text-center">{{databaseItem.StatusCode}}</span>
-                <span class="col-xs-4 text-center">{{databaseItem.URL}}</span>
+                <span class="col-xs-3 text-center">{{databaseItem.URL}}</span>
+                <span class="col-xs-1 text-center">
+                    <button type="button" class="btn btn-default btn-xs added-margin" ng-click="httpDeleteRequestFromDatabase(databaseItem.ResponseID);" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+                    </button>
+                </span>
             </div>
         </div>
 

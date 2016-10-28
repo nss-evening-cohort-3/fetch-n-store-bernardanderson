@@ -45,6 +45,24 @@ namespace fetch_and_store.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = response.ResponseID }, response);
         }
+
+        // DELETE: api/Responses/{id}
+        [ResponseType(typeof(Response))]
+        public IHttpActionResult DeleteResponse(int id)
+        {
+            // .Find() finds something with that primary key; id (has to be id) and is originally defined in the WebApiConfig.cs route 
+            Response response = Context.Responses.Find(id); 
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            Context.Responses.Remove(response);
+            Context.SaveChanges();
+
+            return Ok(response);
+        }
+
         // Used in closing the DB connection but needs to be explictly called
         protected override void Dispose(bool disposing)
         {
@@ -60,3 +78,4 @@ namespace fetch_and_store.Controllers
         }
     }
 }
+ 
