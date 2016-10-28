@@ -47,6 +47,10 @@ textarea {
 
 .queryreporter {
     width: 60vw;
-    height: 150px;
+    height: 160px;
     border: 1px solid lightgray;
+}
+
+.added-margin {
+    margin-top: 6px;
 }
